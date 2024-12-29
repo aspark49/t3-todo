@@ -1,15 +1,30 @@
 import { api } from "@/utils/api";
 import { TodoItem } from "./TodoItem";
 
-export function TodoList() {
+interface TodoListProps {
+  filter: "all" | "active" | "completed";
+}
+
+export function TodoList({ filter }: TodoListProps) {
   const { data: todos, isLoading } = api.todo.getAll.useQuery();
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (!todos?.length) return <div>할 일이 없습니다.</div>;
+  const filteredTodos = todos?.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
+  if (isLoading) {
+    return <div className="text-center text-white">로딩 중...</div>;
+  }
+
+  if (!filteredTodos?.length) {
+    return <div className="text-center text-white">할 일이 없습니다.</div>;
+  }
 
   return (
     <div className="flex flex-col gap-2">
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </div>

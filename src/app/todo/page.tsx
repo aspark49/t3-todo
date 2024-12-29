@@ -26,7 +26,7 @@ export default function TodoPage() {
         <div className="w-full max-w-md">
           <TodoInput />
           <TodoFilter filter={filter} setFilter={setFilter} />
-          <TodoList />
+          <TodoList filter={filter} />
         </div>
       </div>
     </main>
