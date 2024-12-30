@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LatestPost } from "@/app/_components/post";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
+import { SignIn, SignOut } from "./_components/auth-buttons";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -20,12 +21,27 @@ export default async function Home() {
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
           </h1>
 
-          <Link
-            href={"/todo"}
-            className="rounded-xl bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-          >
-            Todo App 바로가기
-          </Link>
+          <div className="absolute right-4 top-4">
+            {session ? (
+              <div className="flex items-center gap-4">
+                <span className="text-white">
+                  {session.user?.name ?? session.user?.email}
+                </span>
+                <SignOut />
+              </div>
+            ) : (
+              <SignIn />
+            )}
+          </div>
+
+          {session && (
+            <Link
+              href={"/todo"}
+              className="rounded-xl bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+            >
+              Todo App 바로가기
+            </Link>
+          )}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
