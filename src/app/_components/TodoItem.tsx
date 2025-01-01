@@ -19,24 +19,32 @@ export function TodoItem({ todo }: TodoItemProps) {
   });
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-zinc-800 px-4 py-2">
+    <div className="group flex items-center gap-3 rounded-lg border border-zinc-700 bg-black/20 px-4 py-3 transition-colors hover:border-zinc-500">
       <input
         type="checkbox"
         checked={todo.completed}
         onChange={() => updateTodo({ id: todo.id, completed: !todo.completed })}
-        className="h-4 w-4 rounded border-zinc-300"
+        className="h-5 w-5 rounded border-zinc-500 bg-zinc-900 checked:bg-purple-600"
       />
       <span
-        className={`flex-1 ${todo.completed ? "text-zinc-500 line-through" : ""}`}
+        className={`flex-1 text-lg ${todo.completed ? "text-zinc-500 line-through" : "text-white"}`}
       >
         {todo.title}
       </span>
-      <button
+      <svg
+        className="h-5 w-5 text-zinc-500 hover:text-red-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
         onClick={() => deleteTodo({ id: todo.id })}
-        className="text-red-500 hover:text-red-700"
       >
-        삭제
-      </button>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
     </div>
   );
 }

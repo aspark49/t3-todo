@@ -5,25 +5,20 @@ interface TodoFilterProps {
 
 export function TodoFilter({ filter, setFilter }: TodoFilterProps) {
   return (
-    <div className="mb-4 flex gap-4">
-      <button
-        onClick={() => setFilter("all")}
-        className={`${filter === "all" ? "text-blue-500" : "text-zinc-400"}`}
-      >
-        전체
-      </button>
-      <button
-        onClick={() => setFilter("active")}
-        className={`${filter === "active" ? "text-blue-500" : "text-zinc-400"}`}
-      >
-        진행중
-      </button>
-      <button
-        onClick={() => setFilter("completed")}
-        className={`${filter === "completed" ? "text-blue-500" : "text-zinc-400"}`}
-      >
-        완료
-      </button>
+    <div className="mb-6 flex justify-center gap-4">
+      {["all", "active", "completed"].map((f) => (
+        <button
+          key={f}
+          onClick={() => setFilter(f as "all" | "active" | "completed")}
+          className={`rounded-full px-4 py-1 text-sm font-medium transition-colors ${
+            filter === f
+              ? "bg-purple-600 text-white"
+              : "text-zinc-400 hover:text-white"
+          }`}
+        >
+          {f === "all" ? "전체" : f === "active" ? "진행중" : "완료"}
+        </button>
+      ))}
     </div>
   );
 }

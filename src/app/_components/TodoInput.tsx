@@ -19,19 +19,19 @@ export function TodoInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
+    <form onSubmit={handleSubmit} className="mb-6 flex gap-2">
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="할 일을 입력하세요"
-        className="lex-1 rounded-md border-2 border-zinc-800 bg-black/10 px-4 py-2"
+        className="flex-1 rounded-lg border-2 border-zinc-700 bg-black/10 px-4 py-2 text-white placeholder:text-zinc-400 focus:border-purple-500 focus:outline-none"
         disabled={isPending}
       />
       <button
         type="submit"
         disabled={isPending}
-        className="rounded-md bg-zinc-800 px-4 py-2 text-white hover:bg-zinc-700 disabled:opacity-50"
+        className="rounded-lg bg-purple-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-purple-700 disabled:opacity-50"
       >
         추가
       </button>

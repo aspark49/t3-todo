@@ -27,23 +27,23 @@ export default function TodoPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="text-while absolute right-4 top-4">
-        {session.user?.name ?? session.user?.email}
-      </div>
+    <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] px-4 text-white">
+      <div className="container max-w-2xl py-16">
+        <div className="mb-8 flex items-center justify-between">
+          <button
+            onClick={() => router.back()}
+            className="rounded-lg bg-white/10 px-4 py-2 font-medium transition-colors hover:bg-white/20"
+          >
+            ← 뒤로가기
+          </button>
+          <div className="text-zinc-400">
+            {session.user?.name ?? session.user?.email}
+          </div>
+        </div>
 
-      <button
-        onClick={() => router.back()}
-        className="absolute left-4 top-4 rounded-xl bg-white/10 px-4 py-2 font-semibold text-white no-underline transition hover:bg-white/20"
-      >
-        ← 뒤로가기
-      </button>
+        <h1 className="mb-12 text-center text-4xl font-bold">Todo App</h1>
 
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Todo App
-        </h1>
-        <div className="w-full max-w-md">
+        <div className="rounded-xl bg-black/30 p-6 shadow-xl">
           <TodoInput />
           <TodoFilter filter={filter} setFilter={setFilter} />
           <TodoList filter={filter} />
